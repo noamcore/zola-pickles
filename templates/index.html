@@ -77,7 +77,9 @@
             <article class="c-article p-list-article">
                 {{ post_macros::title(page=page) }}
                 <div class="c-article__summary">
-                    {% if page.summary -%}
+                    {% if page.extra.summary -%}
+                    {{ post_macros::polish(content=page.extra.summary) }}
+                    {% elif page.summary -%}
                     {{ post_macros::polish(content=page.summary) }}
                     {% else %}
                     {{ post_macros::polish(content=page.content) | truncate(length=280) }}
@@ -86,7 +88,7 @@
                 <a href="{{ page.permalink }}" class="c-article__btn p-list-article__btn">Read more...</a>
             </article>
             {% endfor %}
-            
+
             <nav class="c-pagination p-pagination">
                 <div class="c-pagination__ctrl">
                     <div class="c-pagination__newer">
@@ -106,7 +108,7 @@
             {%- endblock content %}
         </main>
 
-     
+
       <footer class="l-footer">
           {% block footer -%}
           <p class="p-copyright">
@@ -128,7 +130,7 @@
 
           gtag('config', '{{ config.extra.analytics }}');
       </script>
-      {%- endif %} 
+      {%- endif %}
       {% if config.extra.katex_enable -%}
       <link rel="stylesheet" href="{{ get_url(path="css/katex.min.css") }}">
       <script defer src="{{ get_url(path="js/katex.min.js") }}"></script>
@@ -136,4 +138,3 @@
       {%- endif %}
     </body>
 </html>
-            
